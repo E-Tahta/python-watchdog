@@ -1,0 +1,4 @@
+#spelling-fixes.patch
+#sphinx-docs.patch
+#clean-rebuild.patch
+setup.py.patch

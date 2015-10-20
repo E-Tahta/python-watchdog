@@ -1,0 +1,11 @@
+Description: Make possible to build twice the package.
+Author: gustavo panizzo <gfa@zumbi.com.ar>
+Last-Update: 2015-01-02
+--- a/src/watchdog.egg-info/requires.txt
++++ b/src/watchdog.egg-info/requires.txt
+@@ -1,3 +1,3 @@
+ PyYAML >=3.09
+ argh >=0.8.1
+-pathtools >=0.1.1
+\ No newline at end of file
++pathtools >=0.1.1

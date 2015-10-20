@@ -1,11 +1,54 @@
 Source: python-watchdog
-Section: free
-Priority: extra
-Maintainer: Hannu Valtonen <hannu.valtonen@ohmu.fi>
-Build-Depends: cdbs, debhelper (>= 7.0.50~), python-support, python (>= 2.6), python-setuptools (>= 0.6.14 )
-Standards-Version: 3.8.4
+Section: python
+Priority: optional
+Maintainer: Gustavo Panizzo <gfa@zumbi.com.ar>
+Build-Depends: debhelper (>= 9),
+               dh-python,
+               python-all (>= 2.6.6-3~),
+               python-argh (>= 0.24.1),
+               python-pathtools,
+               python-pytest-cov,
+               python-pytest-timeout,
+               python-setuptools,
+               python-sphinx,
+               python-yaml,
+               python3-all,
+               python3-argh (>= 0.24.1),
+               python3-pathtools,
+               python3-pytest-cov,
+               python3-pytest-timeout,
+               python3-setuptools,
+               python3-yaml
+Standards-Version: 3.9.6
+Homepage: http://github.com/gorakhargosh/watchdog
+Vcs-Git: git://anonscm.debian.org/collab-maint/python-watchdog.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/python-watchdog.git;a=summary
+
 
 Package: python-watchdog
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}, python-argparse (>= 1.1), python-yaml (>= 3.09), python-argh (>= 0.14.2), python-pathtools (>= 0.1.1)
-Description: Python Watchdog library for monitoring different directories
+Depends: python,
+         python-pathtools,
+         ${misc:Depends},
+         ${python:Depends},
+         ${sphinxdoc:Depends}
+Suggests: ${python:Recommends}
+Description: Python API and shell utilities to monitor file system events - Python 2.x
+ Watchdog comes with a utility script called watchmedo. It can be used to
+ execute commands in response to events.
+ .
+ This is the Python 2.X version.
+
+Package: python3-watchdog
+Architecture: all
+Depends: python3,
+         python3-pathtools,
+         ${misc:Depends},
+         ${python3:Depends},
+         ${sphinxdoc:Depends}
+Suggests: ${python3:Recommends}
+Description: Python API and shell utilities to monitor file system events - Python 3.x
+ Watchdog comes with a utility script called watchmedo. It can be used to
+ execute commands in response to events.
+ .
+ This is the Python 3.X version.

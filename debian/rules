@@ -1,6 +1,39 @@
 #!/usr/bin/make -f
 
-DEB_PYTHON_SYSTEM=pysupport
+export PYBUILD_NAME=watchdog
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/python-distutils.mk
+%:
+	dh $@ --buildsystem=pybuild --with python3,python2,sphinxdoc
+
+override_dh_installchangelogs:
+	if [ -e $(CURDIR)/debian/CHANGELOG ] ; then \
+		dh_installchangelogs $(CURDIR)/debian/CHANGELOG ; \
+	else \
+		dh_installchangelogs ; \
+	fi
+
+override_dh_clean:
+	dh_clean
+	rm -rf docs/build src/watchdog.egg-info
+
+override_dh_sphinxdoc:
+ifeq (,$(findstring nodocs, $(DEB_BUILD_OPTIONS)))
+	sphinx-build -b man docs/source docs/build/man
+	sed -i 's/.TH "WATCHDOG" "1"/.TH "WATCHDOG" "3"/g' docs/build/man/watchdog.1
+	cp -f docs/build/man/watchdog.1 docs/build/man/watchdog3.1
+	PYTHONPATH=. sphinx-build -b html docs/source $(CURDIR)/debian/python-watchdog/usr/share/doc/python-watchdog/html
+	PYTHONPATH=. sphinx-build -b html docs/source $(CURDIR)/debian/python3-watchdog/usr/share/doc/python3-watchdog/html
+	dh_sphinxdoc -O--buildsystem=pybuild
+endif
+
+override_dh_installdocs:
+	dh_installdocs
+	dh_installdocs -A AUTHORS
+
+
+override_dh_install:
+	mv debian/python3-watchdog/usr/bin/watchmedo debian/python3-watchdog/usr/bin/watchmedo3
+	sed -i 's#/usr/bin/python[2-3]#/usr/bin/python2#' debian/python-watchdog/usr/bin/watchmedo
+	sed -i 's#/usr/bin/python[2-3]#/usr/bin/python3#' debian/python3-watchdog/usr/bin/watchmedo3
+	dh_install -O--buildsystem=pybuild
+

@@ -1,0 +1,25 @@
+Description: Fix spelling and formating errors. 
+Author: gustavo panizzo <gfa@zumbi.com.ar> 
+Last-Update: 2014-04-15
+--- a/src/watchdog/events.py
++++ b/src/watchdog/events.py
+@@ -321,7 +321,7 @@
+                           dest_path=self.dest_path))
+ 
+     def sub_moved_events(self, _walker=os.walk):
+-        """Generates moved events for file sytem objects within the
++        """Generates moved events for file system objects within the
+         moved directory.
+ 
+         :param _walker:
+--- a/src/watchdog/utils/dirsnapshot.py
++++ b/src/watchdog/utils/dirsnapshot.py
+@@ -21,7 +21,7 @@
+ :synopsis: Directory snapshots and comparison.
+ :author: yesudeep@google.com (Yesudeep Mangalapilly)
+ 
+-.. ADMONITION:: Where are the moved events? They "disappeared"
++.. ADMONITION:: Where are the moved events? They 'disappeared'
+ 
+         This implementation does not take partition boundaries
+         into consideration. It will only work when the directory

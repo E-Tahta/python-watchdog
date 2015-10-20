@@ -1,0 +1,57 @@
+Description: Make possible to run tests on python3.5.
+Author: gustavo panizzo <gfa@zumbi.com.ar>
+Last-Update: 2015-10-20
+--- a/setup.py
++++ b/setup.py
+@@ -16,13 +16,12 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+-import sys
+ import imp
++import sys
+ import os.path
+ from setuptools import setup, find_packages
+ from setuptools.extension import Extension
+ from setuptools.command.build_ext import build_ext
+-from setuptools.command.test import test as TestCommand
+ from distutils.util import get_platform
+ 
+ SRC_DIR = 'src'
+@@ -64,23 +63,6 @@
+     ]
+ 
+ 
+-class PyTest(TestCommand):
+-    def finalize_options(self):
+-        TestCommand.finalize_options(self)
+-        self.test_args = [
+-            '--cov=' + SRC_DIR,
+-            '--cov-report=term-missing',
+-            'tests']
+-        self.test_suite = True
+-    def run_tests(self):
+-        import pytest
+-        errno = pytest.main(self.test_args)
+-        sys.exit(errno)
+-
+-tests_require=['pytest', 'pytest-cov', 'pytest-timeout >=0.3']
+-if sys.version_info < (2, 7, 0):
+-    tests_require.append('unittest2')
+-
+ install_requires = ['PyYAML >=3.10', 'argh >=0.24.1', 'pathtools >=0.1.1']
+ if sys.version_info < (2, 7, 0):
+     # argparse is merged into Python 2.7 in the Python 2x series
+@@ -142,11 +124,7 @@
+       packages=find_packages(SRC_DIR),
+       include_package_data=True,
+       install_requires=install_requires,
+-      tests_require=tests_require,
+-      cmdclass={
+-          'build_ext': build_ext,
+-          'test': PyTest,
+-      },
++      test_suite='tests',
+       ext_modules=ext_modules,
+       entry_points={'console_scripts': [
+           'watchmedo = watchdog.watchmedo:main',
