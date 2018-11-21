@@ -1,3 +1,10 @@
+python-watchdog (0.8.3-2pardus1) unstable; urgency=medium
+
+  * Remove gbp.conf for clean build
+  * Pardus CI integration
+
+ -- Yunusemre Şentürk <yunusemre.senturk@pardus.org.tr>  Wed, 21 Nov 2018 16:18:13 +0300
+
 python-watchdog (0.8.3-2) unstable; urgency=medium
 
   * Fix tests for Python 3. (Closes: #801726).
